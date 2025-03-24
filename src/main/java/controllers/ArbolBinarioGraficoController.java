@@ -105,6 +105,11 @@ public class ArbolBinarioGraficoController {
         gc = canvas.getGraphicsContext2D();
         limpiarCanvas();
 
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        anchorPaneCanvas.setPrefSize(canvas.getWidth(),canvas.getHeight());
+
         // Detectar cuando se presiona el mouse
         scrollPane.setOnMousePressed(event -> {
             lastX = event.getSceneX();
@@ -148,7 +153,7 @@ public class ArbolBinarioGraficoController {
             int dato = Integer.parseInt(tokenActual);
             arbol.insertar(dato);
             //ajustarCanvas();
-            dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()-255.5,canvas.getScaleY()+20,200);
+            dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()/2,canvas.getScaleY()+20,200);
         }
         lblMensaje.setText(listado+"");
         txtFIngresarDato.setText("");

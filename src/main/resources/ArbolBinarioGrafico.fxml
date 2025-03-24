@@ -48,7 +48,7 @@
       </Label>
       <ScrollPane fx:id="scrollPane" layoutX="213.0" layoutY="37.0" prefHeight="607.0" prefWidth="699.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane fx:id="anchorPaneCanvas" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Canvas fx:id="canvas" height="1000.0" width="1000.0" />
                </children>
