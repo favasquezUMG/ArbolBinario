@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMouseClicked="#crearNodo" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ArbolBinarioGraficoController">
+<AnchorPane onMouseClicked="#crearNodo" prefHeight="648.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ArbolBinarioGraficoController">
    <children>
       <Button layoutX="58.0" layoutY="479.0" mnemonicParsing="false" onAction="#resetearArbol" text="Resetear Arbol" />
-      <Button layoutX="765.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: Transparent; -fx-border-color: Black;" text="X" textAlignment="CENTER" textFill="RED">
+      <Button layoutX="890.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: Transparent; -fx-border-color: Black;" text="X" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
          </font>
@@ -23,8 +23,8 @@
       <Button layoutX="26.0" layoutY="236.0" mnemonicParsing="false" onAction="#posordenRecorrido" text="Posorden" />
       <Button layoutX="27.0" layoutY="200.0" mnemonicParsing="false" onAction="#inordenRecorrido" text="Inorden" />
       <Button layoutX="122.0" layoutY="200.0" mnemonicParsing="false" onAction="#ingresarDato" onKeyPressed="#Enter" text="Ingresar" />
-      <Canvas fx:id="canvas" height="512.0" layoutX="255.0" layoutY="24.0" style="-fx-cursor: green;" width="536.0" />
       <Label fx:id="lblMensaje" layoutX="33.0" layoutY="167.0" />
       <Button layoutX="46.0" layoutY="334.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar archivo" />
+      <Canvas fx:id="canvas" height="638.0" layoutX="247.0" layoutY="8.0" width="639.0" />
    </children>
 </AnchorPane>

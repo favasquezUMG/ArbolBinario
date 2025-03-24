@@ -1,6 +1,7 @@
 package controllers;
 
 import application.ArbolBinario;
+import application.Nodo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -8,8 +9,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -27,17 +28,15 @@ public class ArbolBinarioGraficoController {
     Stage stage;
     GraphicsContext gc;
 
-    //Dibujar el arbol
-    public void initialize() {
-        gc = canvas.getGraphicsContext2D();
-        limpiarCanvas();
-    }
-    private void dibujarNodo(double x, double y) {
-        double radius = 60;
+    //Dibujar Nodo
+    private void dibujarNodo(double x, double y, int valor) {
+        double radius = 30;
         gc.setFill(Color.PALEGREEN);
         gc.fillOval(x - radius / 2, y - radius / 2, radius, radius);
         gc.setStroke(Color.DARKOLIVEGREEN);
         gc.strokeOval(x - radius / 2, y - radius / 2, radius, radius);
+        gc.setFill(Color.FORESTGREEN);
+        gc.fillText(String.valueOf(valor),x-4,y+5);
     }
     private void limpiarCanvas() {
         gc.setFill(Color.WHITE);
@@ -53,6 +52,26 @@ public class ArbolBinarioGraficoController {
         } catch (IOException e){
             lblMensaje.setText("Error al leer el archivo :(");
         }
+    }
+
+    public void dibujarArbol(GraphicsContext gc, Nodo nodo, double x, double y, double offset){
+        //initialize();
+        gc = canvas.getGraphicsContext2D();
+        if(nodo != null){
+            dibujarNodo(x,y, nodo.getDato());
+
+            if(nodo.getIzquierda()!=null){
+                gc.setStroke(Color.SADDLEBROWN);
+                gc.strokeLine(x, y, x - offset, y + 100);
+                dibujarArbol(gc, nodo.getIzquierda(), x - offset, y + 100, offset / 2);
+            }
+            if(nodo.getDerecha()!=null){
+                gc.setStroke(Color.SADDLEBROWN);
+                gc.strokeLine(x, y, x + offset, y + 100);
+                dibujarArbol(gc, nodo.getDerecha(), x + offset, y + 100, offset / 2);
+            }
+        }
+
     }
 
 
@@ -72,14 +91,15 @@ public class ArbolBinarioGraficoController {
     void Enter(KeyEvent event) {
 
     }
+    @FXML
+    void initialize() {
+        gc = canvas.getGraphicsContext2D();
+        limpiarCanvas();
+    }
 
     @FXML
     void crearNodo(MouseEvent event) {
-        if (event.getButton() == MouseButton.SECONDARY) { // Clic derecho
-            double x = event.getX()-255.5;
-            double y = event.getY()-25;
-            dibujarNodo(x, y);
-        }
+        //if (event.getButton() == MouseButton.SECONDARY) {}
     }
 
     @FXML
@@ -89,7 +109,6 @@ public class ArbolBinarioGraficoController {
 
     @FXML
     void ingresarDato(ActionEvent event) {
-        limpiarCanvas();
         txtRecorrido.setText("");
         String linea = txtFIngresarDato.getText();
         StringTokenizer listaDatos = new StringTokenizer(txtFIngresarDato.getText(), ",");
@@ -99,9 +118,11 @@ public class ArbolBinarioGraficoController {
             listado.append(tokenActual).append(", ");
             int dato = Integer.parseInt(tokenActual);
             arbol.insertar(dato);
+            dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()-255.5,canvas.getScaleY()+20,200);
         }
         lblMensaje.setText(listado+"");
         txtFIngresarDato.setText("");
+        //dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()-255.5,canvas.getScaleY()+20,200);
     }
 
     @FXML
@@ -125,6 +146,7 @@ public class ArbolBinarioGraficoController {
         listado = new StringBuilder();
         txtRecorrido.setText("Reiniciado");
         lblMensaje.setText("...");
+        limpiarCanvas();
     }
 
     @FXML

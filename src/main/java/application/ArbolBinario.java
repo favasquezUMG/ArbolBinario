@@ -11,32 +11,18 @@ public class ArbolBinario {
         num_nodos = 0;
     }
 
-    //Solo se usa si se quiere hacer sin recursividad
-    public boolean existeNodo(int dato){
-        Nodo aux = raiz;
-        while (aux!=null) {
+    public Nodo getRaizArbol(){
+        return raiz;
+    }
 
-            if(dato == aux.getDato()){
-                System.out.println("Ya existe");
-                return true;
-            }else{
-                if(dato>aux.getDato()){
-                    aux = aux.getDerecha();
-                }else{
-                    aux = aux.getIzquierda();
-                }
-                System.out.println("Se asignó en un hijo");
-            }
-        }
-        return false;
-
+    public int getDatoArbol(){
+        return raiz.getDato();
     }
 
     public void insertar(int dato){
         raiz = insertarRecursivo(raiz, dato);
     }
-
-    public Nodo insertarRecursivo(Nodo raizInsertar, int dato){
+    private Nodo insertarRecursivo(Nodo raizInsertar, int dato){
         if(raizInsertar == null){
             return new Nodo(dato);
         }
@@ -57,7 +43,7 @@ public class ArbolBinario {
         preOrdenRecursivo(raiz, resultado);
         return resultado.toString();
     }
-    public void preOrdenRecursivo(Nodo raiz, StringBuilder r){
+    private void preOrdenRecursivo(Nodo raiz, StringBuilder r){
         if(raiz == null){
             return;
         }
@@ -74,7 +60,7 @@ public class ArbolBinario {
         inOrdenRecursivo(raiz, resultado);
         return resultado.toString();
     }
-    public void inOrdenRecursivo(Nodo raiz, StringBuilder r){
+    private void inOrdenRecursivo(Nodo raiz, StringBuilder r){
         if(raiz == null){
             return;
         }
@@ -89,7 +75,7 @@ public class ArbolBinario {
         postOrdenRecursivo(raiz, resultado);
         return resultado.toString();
     }
-    public void postOrdenRecursivo(Nodo raiz, StringBuilder r){
+    private void postOrdenRecursivo(Nodo raiz, StringBuilder r){
         if(raiz == null){
             return;
         }
@@ -133,9 +119,5 @@ public class ArbolBinario {
         this.raiz = null;
         this.alt = 0;
         this.num_nodos = 0;
-    }
-
-    public String getDatoArbol(){
-        return ""+raiz.getDato();
     }
 }
