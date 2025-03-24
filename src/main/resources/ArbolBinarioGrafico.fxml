@@ -3,13 +3,14 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane onMouseClicked="#crearNodo" prefHeight="648.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ArbolBinarioGraficoController">
    <children>
-      <Button layoutX="58.0" layoutY="479.0" mnemonicParsing="false" onAction="#resetearArbol" text="Resetear Arbol" />
+      <Button layoutX="60.0" layoutY="591.0" mnemonicParsing="false" onAction="#resetearArbol" style="-fx-border-color: Red;" text="Resetear Arbol" />
       <Button layoutX="890.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: Transparent; -fx-border-color: Black;" text="X" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Bauhaus 93" size="12.0" />
@@ -17,14 +18,42 @@
       </Button>
       <TextField fx:id="txtFIngresarDato" layoutX="33.0" layoutY="54.0" />
       <TextField fx:id="txtRecorrido" layoutX="33.0" layoutY="124.0" />
-      <Label layoutX="33.0" layoutY="25.0" text="Ingresar Dato" />
-      <Label layoutX="33.0" layoutY="99.0" text="Recorrido" />
-      <Button layoutX="26.0" layoutY="273.0" mnemonicParsing="false" onAction="#preordenRecorrido" text="Preorden" />
-      <Button layoutX="26.0" layoutY="236.0" mnemonicParsing="false" onAction="#posordenRecorrido" text="Posorden" />
-      <Button layoutX="27.0" layoutY="200.0" mnemonicParsing="false" onAction="#inordenRecorrido" text="Inorden" />
-      <Button layoutX="122.0" layoutY="200.0" mnemonicParsing="false" onAction="#ingresarDato" onKeyPressed="#Enter" text="Ingresar" />
-      <Label fx:id="lblMensaje" layoutX="33.0" layoutY="167.0" />
-      <Button layoutX="46.0" layoutY="334.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar archivo" />
-      <Canvas fx:id="canvas" height="638.0" layoutX="247.0" layoutY="8.0" width="639.0" />
+      <Label layoutX="33.0" layoutY="25.0" text="Ingresar Dato">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="33.0" layoutY="99.0" text="Recorrido">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button layoutX="71.0" layoutY="373.0" mnemonicParsing="false" onAction="#preordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Preorden" />
+      <Button layoutX="71.0" layoutY="336.0" mnemonicParsing="false" onAction="#posordenRecorrido" text="Posorden" />
+      <Button layoutX="71.0" layoutY="300.0" mnemonicParsing="false" onAction="#inordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Inorden" />
+      <Button layoutX="72.0" layoutY="171.0" mnemonicParsing="false" onAction="#ingresarDato" onKeyPressed="#Enter" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: Green;" text="Ingresar" />
+      <Label fx:id="lblMensaje" layoutX="33.0" layoutY="225.0" prefHeight="18.0" prefWidth="0.0">
+         <font>
+            <Font name="Lucida Console" size="12.0" />
+         </font></Label>
+      <Button layoutX="45.0" layoutY="453.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar archivo" />
+      <Button layoutX="45.0" layoutY="495.0" mnemonicParsing="false" onAction="#guardarRecorrido" text="Guardar Recorridos" />
+      <Label layoutX="32.0" layoutY="282.0" text="Recorridos">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="435.0" text="Archivos .txt">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="scrollPane" layoutX="213.0" layoutY="37.0" prefHeight="607.0" prefWidth="699.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Canvas fx:id="canvas" height="1000.0" width="1000.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

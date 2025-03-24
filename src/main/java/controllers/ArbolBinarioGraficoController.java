@@ -7,15 +7,18 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -71,9 +74,13 @@ public class ArbolBinarioGraficoController {
                 dibujarArbol(gc, nodo.getDerecha(), x + offset, y + 100, offset / 2);
             }
         }
-
     }
 
+    @FXML
+    private AnchorPane anchorPaneCanvas;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     @FXML
     private Canvas canvas;
@@ -91,10 +98,32 @@ public class ArbolBinarioGraficoController {
     void Enter(KeyEvent event) {
 
     }
+
+    private double lastX, lastY;
     @FXML
     void initialize() {
         gc = canvas.getGraphicsContext2D();
         limpiarCanvas();
+
+        // Detectar cuando se presiona el mouse
+        scrollPane.setOnMousePressed(event -> {
+            lastX = event.getSceneX();
+            lastY = event.getSceneY();
+        });
+
+        // Detectar cuando se arrastra el mouse
+        scrollPane.setOnMouseDragged(event -> {
+            double deltaX = (lastX - event.getSceneX()) / scrollPane.getWidth();
+            double deltaY = (lastY - event.getSceneY()) / scrollPane.getHeight();
+
+            // Ajustar el ScrollPane en X y Y
+            scrollPane.setHvalue(scrollPane.getHvalue() + deltaX);
+            scrollPane.setVvalue(scrollPane.getVvalue() + deltaY);
+
+            // Actualizar última posición del mouse
+            lastX = event.getSceneX();
+            lastY = event.getSceneY();
+        });
     }
 
     @FXML
@@ -118,11 +147,11 @@ public class ArbolBinarioGraficoController {
             listado.append(tokenActual).append(", ");
             int dato = Integer.parseInt(tokenActual);
             arbol.insertar(dato);
+            //ajustarCanvas();
             dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()-255.5,canvas.getScaleY()+20,200);
         }
         lblMensaje.setText(listado+"");
         txtFIngresarDato.setText("");
-        //dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()-255.5,canvas.getScaleY()+20,200);
     }
 
     @FXML
@@ -158,4 +187,26 @@ public class ArbolBinarioGraficoController {
         leerArchivo(archivoSeleccionado.toPath());
     }
 
+    @FXML
+    void guardarRecorrido(ActionEvent event) {
+        String archivo = "Recorridos.txt";
+
+        try(BufferedWriter guardar = new BufferedWriter(new FileWriter(archivo, true))){
+            guardar.write("//PreOrden");
+            guardar.newLine();
+            guardar.write(arbol.preOrden());
+            guardar.newLine();
+            guardar.write("//InOrden");
+            guardar.newLine();
+            guardar.write(arbol.inOrden());
+            guardar.newLine();
+            guardar.write("//PostOrden");
+            guardar.newLine();
+            guardar.write(arbol.postOrden());
+            guardar.newLine();
+            lblMensaje.setText("Archivo guardado!");
+        }catch (IOException e){
+            lblMensaje.setText("Error: "+e.getMessage());
+        }
+    }
 }

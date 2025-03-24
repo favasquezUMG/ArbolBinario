@@ -11,6 +11,19 @@ public class ArbolBinario {
         num_nodos = 0;
     }
 
+    public int obtenerAltura(){
+        return obtenerAlturaRecursivo(raiz);
+    }
+    private int obtenerAlturaRecursivo(Nodo nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        int alturaIzquierda = obtenerAlturaRecursivo(nodo.izq);
+        int alturaDerecha = obtenerAlturaRecursivo(nodo.der);
+
+        return Math.max(alturaIzquierda, alturaDerecha) + 1;
+    }
+
     public Nodo getRaizArbol(){
         return raiz;
     }
