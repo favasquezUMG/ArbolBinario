@@ -30,10 +30,6 @@
       <Button layoutX="71.0" layoutY="336.0" mnemonicParsing="false" onAction="#posordenRecorrido" text="Posorden" />
       <Button layoutX="71.0" layoutY="300.0" mnemonicParsing="false" onAction="#inordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Inorden" />
       <Button layoutX="72.0" layoutY="171.0" mnemonicParsing="false" onAction="#ingresarDato" onKeyPressed="#Enter" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: Green;" text="Ingresar" />
-      <Label fx:id="lblMensaje" layoutX="33.0" layoutY="225.0" prefHeight="18.0" prefWidth="0.0">
-         <font>
-            <Font name="Lucida Console" size="12.0" />
-         </font></Label>
       <Button layoutX="45.0" layoutY="453.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar archivo" />
       <Button layoutX="45.0" layoutY="495.0" mnemonicParsing="false" onAction="#guardarRecorrido" text="Guardar Recorridos" />
       <Label layoutX="32.0" layoutY="282.0" text="Recorridos">
@@ -55,5 +51,6 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Label fx:id="lblMensaje" layoutX="31.0" layoutY="223.0" />
    </children>
 </AnchorPane>
