@@ -133,21 +133,28 @@ public class ArbolBinario {
         if(raizEliminar == null){
             return raizEliminar;
         }
-
+        //1er caso
         if(valor<raizEliminar.getDato()){
             raizEliminar.izq = eliminarRecursivo(raizEliminar.izq, valor);
         }else if (valor>raizEliminar.getDato()){
             raizEliminar.der = eliminarRecursivo(raizEliminar.der, valor);
         }else{
+            //2do caso
             if(raizEliminar.der == null){
                 raizEliminar = raizEliminar.izq;
             } else if (raizEliminar.izq == null) {
                 raizEliminar = raizEliminar.der;
+            }else{
+                //3er caso
+                Nodo temporal = sucesorRecursivo(raizEliminar.der);
+                raizEliminar.setDato(temporal.getDato());
+                raizEliminar.der = eliminarRecursivo(raizEliminar.der, raizEliminar.getDato());
             }
         }
-
-
-        return raizEliminar;
+        if(raizEliminar == null){
+            return raizEliminar;
+        }
+        return balanceArbol(raizEliminar);
     }
 
     public void reiniciarArbol(){

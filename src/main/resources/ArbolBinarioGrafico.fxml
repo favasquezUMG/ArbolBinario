@@ -26,13 +26,13 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Button layoutX="71.0" layoutY="373.0" mnemonicParsing="false" onAction="#preordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Preorden" />
-      <Button layoutX="71.0" layoutY="336.0" mnemonicParsing="false" onAction="#posordenRecorrido" text="Posorden" />
-      <Button layoutX="71.0" layoutY="300.0" mnemonicParsing="false" onAction="#inordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Inorden" />
+      <Button layoutX="71.0" layoutY="393.0" mnemonicParsing="false" onAction="#preordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Preorden" />
+      <Button layoutX="71.0" layoutY="356.0" mnemonicParsing="false" onAction="#posordenRecorrido" text="Posorden" />
+      <Button layoutX="71.0" layoutY="320.0" mnemonicParsing="false" onAction="#inordenRecorrido" prefHeight="26.0" prefWidth="66.0" text="Inorden" />
       <Button layoutX="72.0" layoutY="171.0" mnemonicParsing="false" onAction="#ingresarDato" onKeyPressed="#Enter" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: Green;" text="Ingresar" />
       <Button layoutX="45.0" layoutY="453.0" mnemonicParsing="false" onAction="#seleccionarArchivo" text="Seleccionar archivo" />
       <Button layoutX="45.0" layoutY="495.0" mnemonicParsing="false" onAction="#guardarRecorrido" text="Guardar Recorridos" />
-      <Label layoutX="32.0" layoutY="282.0" text="Recorridos">
+      <Label layoutX="32.0" layoutY="302.0" text="Recorridos">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -42,6 +42,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Label fx:id="lblMensaje" layoutX="31.0" layoutY="223.0" />
       <ScrollPane fx:id="scrollPane" layoutX="213.0" layoutY="37.0" prefHeight="607.0" prefWidth="699.0">
         <content>
           <AnchorPane fx:id="anchorPaneCanvas" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
@@ -51,8 +52,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label fx:id="lblMensaje" layoutX="31.0" layoutY="223.0" />
-      <Button layoutX="45.0" layoutY="256.0" mnemonicParsing="false" onAction="#buscarNodo" text="Buscar" />
-      <Button layoutX="130.0" layoutY="256.0" mnemonicParsing="false" onAction="#eliminarNodo" text="Eliminar" />
+      <Button layoutX="34.0" layoutY="256.0" mnemonicParsing="false" onAction="#buscarNodo" text="Buscar" />
+      <Button layoutX="117.0" layoutY="256.0" mnemonicParsing="false" onAction="#eliminarNodo" text="Eliminar" />
    </children>
 </AnchorPane>
