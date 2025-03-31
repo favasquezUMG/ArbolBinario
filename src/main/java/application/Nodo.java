@@ -2,10 +2,12 @@ package application;
 
 public class Nodo {
     private int dato;
+    int alturaNodo;
     Nodo izq,der;
 
     public Nodo(int dato){
         this.dato = dato;
+        this.alturaNodo = 1;
         izq = null;
         der = null;
     }

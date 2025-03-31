@@ -98,7 +98,8 @@ public class ArbolBinarioGraficoController {
 
     @FXML
     void Enter(KeyEvent event) {
-
+        int altura = arbol.altura(arbol.getRaizArbol().getDerecha());
+        System.out.println(""+altura);
     }
 
     @FXML
@@ -170,6 +171,7 @@ public class ArbolBinarioGraficoController {
             int dato = Integer.parseInt(tokenActual);
             arbol.insertar(dato);
             //ajustarCanvas();
+            limpiarCanvas();
             dibujarArbolEliminar();
             //dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()/2,canvas.getScaleY()+20,200);
         }

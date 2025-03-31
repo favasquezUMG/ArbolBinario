@@ -7,7 +7,7 @@ public class ArbolBinario {
 
     public ArbolBinario(){
         this.raiz = null;
-        alt = 0;
+        alt = 1;
         num_nodos = 0;
     }
 
@@ -45,7 +45,8 @@ public class ArbolBinario {
         }else{
             raizInsertar.der = insertarRecursivo(raizInsertar.der, dato);
         }
-        return raizInsertar;
+        //return raizInsertar;
+        return balanceArbol(raizInsertar);
     }
 
     //Recorridos
@@ -104,7 +105,6 @@ public class ArbolBinario {
         buscarRecursivo(raiz, valor);
         return alt;
     }
-
     private Nodo buscarRecursivo(Nodo raizBuscar, int valor){
         System.out.println(""+raizBuscar.getDato());
         if(raizBuscar.getDato() == valor){
@@ -132,6 +132,7 @@ public class ArbolBinario {
     private Nodo eliminarRecursivo(Nodo raizEliminar, int valor){
         if(raizEliminar == null){
             return raizEliminar;
+            //return balanceArbol(raizEliminar);
         }
         //1er caso
         if(valor<raizEliminar.getDato()){
@@ -153,8 +154,10 @@ public class ArbolBinario {
         }
         if(raizEliminar == null){
             return raizEliminar;
+            //return balanceArbol(raizEliminar);
         }
-        return balanceArbol(raizEliminar);
+        return raizEliminar;
+        //return balanceArbol(raizEliminar);
     }
 
     public void reiniciarArbol(){
@@ -163,21 +166,69 @@ public class ArbolBinario {
         this.num_nodos = 0;
     }
 
+    //Parte AVL
     public int altura(Nodo raizAltura){
         if(raizAltura == null){
             return 0;
         }
+        return raizAltura.alturaNodo;
+    }
+    public void restablecerAltura(Nodo raizRestablecerAltura){
+        int izq = altura(raiz.izq);
+        int der = altura(raiz.der);
 
-        return alt;
+        raizRestablecerAltura.alturaNodo = Math.max(izq, der) + 1;
     }
     public int balance(Nodo raizBalance){
         if(raizBalance == null){
             return 0;
         }
-        //Provisional
-        return 1;
+        return (altura(raizBalance.der)-altura(raizBalance.izq));
     }
     public Nodo balanceArbol(Nodo raizBalanceArbol){
+        restablecerAltura(raizBalanceArbol);
+        int bal = balance(raizBalanceArbol);
+
+        if(bal > 1){ //Der
+            if(balance(raizBalanceArbol.der)<0){ //Der,Izq
+                raizBalanceArbol.der = rotacionDer(raizBalanceArbol.der);
+                return rotacionIzq(raizBalanceArbol);
+            }
+            //Der,Der
+            return rotacionIzq(raizBalanceArbol);
+        }
+        if (bal < -1){ //Izq
+            if (balance(raizBalanceArbol.izq)> 0){ //Izq,Der
+                raizBalanceArbol.izq = rotacionIzq(raizBalanceArbol.izq);
+                return rotacionDer(raizBalanceArbol);
+            }
+            //Izq,Izq
+            return rotacionDer(raizBalanceArbol);
+        }
         return raizBalanceArbol;
+    }
+    public Nodo rotacionIzq(Nodo x){
+        Nodo y = x.der;
+        Nodo temp = y.izq;
+
+        y.izq = x;
+        x.der = temp;
+
+        restablecerAltura(x);
+        restablecerAltura(y);
+
+        return y;
+    }
+    public Nodo rotacionDer(Nodo y){
+        Nodo x = y.izq;
+        Nodo temp = x.der;
+
+        x.der = y;
+        y.izq = temp;
+
+        restablecerAltura(y);
+        restablecerAltura(x);
+
+        return x;
     }
 }
