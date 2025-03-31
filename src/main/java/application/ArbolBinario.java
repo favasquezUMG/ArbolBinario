@@ -99,38 +99,78 @@ public class ArbolBinario {
     }
     //Fin de los recorridos
 
-    public void buscar(int valor){
-        boolean buscar = buscarRecursivo(raiz, valor);
-        if(buscar == true){
-            System.out.println("Si existe");
+    public int buscar(int valor){
+        alt = 1;
+        buscarRecursivo(raiz, valor);
+        return alt;
+    }
+
+    private Nodo buscarRecursivo(Nodo raizBuscar, int valor){
+        System.out.println(""+raizBuscar.getDato());
+        if(raizBuscar.getDato() == valor){
+            return raizBuscar;
+        }
+
+        if(valor<raizBuscar.getDato()){
+            raizBuscar.izq = buscarRecursivo(raizBuscar.izq, valor);
         }else{
-            System.out.println("No existe");
+            raizBuscar.der = buscarRecursivo(raizBuscar.der, valor);
         }
+        alt++;
+        return raizBuscar;
     }
 
-    private boolean buscarRecursivo(Nodo raiz, int valor){
-        boolean buscar;
-        if(raiz == null){
-            return false;
+    private Nodo sucesorRecursivo(Nodo raizSucesor){
+        if(raizSucesor.izq != null){
+            return sucesorRecursivo(raizSucesor.izq);
         }
-        if(raiz.getDato() == valor){
-            return true;
-        }
-        if(raiz.getDato()<valor){
-            buscar = buscarRecursivo(raiz.izq, valor);
-        }if(raiz.getDato()>valor){
-            buscar = buscarRecursivo(raiz.der, valor);
-        }
-        return false;
+        return raizSucesor;
     }
+    public void eliminar(int valor){
+        eliminarRecursivo(raiz,valor);
+    }
+    private Nodo eliminarRecursivo(Nodo raizEliminar, int valor){
+        if(raizEliminar == null){
+            return raizEliminar;
+        }
 
-    private Nodo eliminar(){
-        return null;
+        if(valor<raizEliminar.getDato()){
+            raizEliminar.izq = eliminarRecursivo(raizEliminar.izq, valor);
+        }else if (valor>raizEliminar.getDato()){
+            raizEliminar.der = eliminarRecursivo(raizEliminar.der, valor);
+        }else{
+            if(raizEliminar.der == null){
+                raizEliminar = raizEliminar.izq;
+            } else if (raizEliminar.izq == null) {
+                raizEliminar = raizEliminar.der;
+            }
+        }
+
+
+        return raizEliminar;
     }
 
     public void reiniciarArbol(){
         this.raiz = null;
         this.alt = 0;
         this.num_nodos = 0;
+    }
+
+    public int altura(Nodo raizAltura){
+        if(raizAltura == null){
+            return 0;
+        }
+
+        return alt;
+    }
+    public int balance(Nodo raizBalance){
+        if(raizBalance == null){
+            return 0;
+        }
+        //Provisional
+        return 1;
+    }
+    public Nodo balanceArbol(Nodo raizBalanceArbol){
+        return raizBalanceArbol;
     }
 }

@@ -56,7 +56,9 @@ public class ArbolBinarioGraficoController {
             lblMensaje.setText("Error al leer el archivo :(");
         }
     }
-
+    public void dibujarArbolEliminar(){
+        dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()/2,canvas.getScaleY()+20,200);
+    }
     public void dibujarArbol(GraphicsContext gc, Nodo nodo, double x, double y, double offset){
         //initialize();
         gc = canvas.getGraphicsContext2D();
@@ -97,6 +99,21 @@ public class ArbolBinarioGraficoController {
     @FXML
     void Enter(KeyEvent event) {
 
+    }
+
+    @FXML
+    void eliminarNodo(ActionEvent event) {
+        int valor = Integer.parseInt(txtFIngresarDato.getText());
+        arbol.eliminar(valor);
+        limpiarCanvas();
+        dibujarArbolEliminar();
+    }
+
+    @FXML
+    void buscarNodo(ActionEvent event) {
+        int valor = Integer.parseInt(txtFIngresarDato.getText());
+        int lugarNodo = arbol.buscar(valor);
+        lblMensaje.setText("La altura del nodo es: "+lugarNodo);
     }
 
     private double lastX, lastY;
@@ -153,7 +170,8 @@ public class ArbolBinarioGraficoController {
             int dato = Integer.parseInt(tokenActual);
             arbol.insertar(dato);
             //ajustarCanvas();
-            dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()/2,canvas.getScaleY()+20,200);
+            dibujarArbolEliminar();
+            //dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()/2,canvas.getScaleY()+20,200);
         }
         lblMensaje.setText(listado+"");
         txtFIngresarDato.setText("");
