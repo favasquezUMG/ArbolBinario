@@ -126,12 +126,12 @@ public class ArbolBinario {
         }
         return raizSucesor;
     }
-    public void eliminar(int valor){
-        eliminarRecursivo(raiz,valor);
+    public Nodo eliminar(int valor){
+        return eliminarRecursivo(raiz,valor);
     }
     private Nodo eliminarRecursivo(Nodo raizEliminar, int valor){
         if(raizEliminar == null){
-            return raizEliminar;
+            return null;
             //return balanceArbol(raizEliminar);
         }
         //1er caso
@@ -153,7 +153,7 @@ public class ArbolBinario {
             }
         }
         if(raizEliminar == null){
-            return raizEliminar;
+            return null;
             //return balanceArbol(raizEliminar);
         }
         return raizEliminar;
@@ -174,8 +174,8 @@ public class ArbolBinario {
         return raizAltura.alturaNodo;
     }
     public void restablecerAltura(Nodo raizRestablecerAltura){
-        int izq = altura(raiz.izq);
-        int der = altura(raiz.der);
+        int izq = altura(raizRestablecerAltura.izq);
+        int der = altura(raizRestablecerAltura.der);
 
         raizRestablecerAltura.alturaNodo = Math.max(izq, der) + 1;
     }
@@ -186,6 +186,9 @@ public class ArbolBinario {
         return (altura(raizBalance.der)-altura(raizBalance.izq));
     }
     public Nodo balanceArbol(Nodo raizBalanceArbol){
+        if(raizBalanceArbol == null){
+            return null;
+        }
         restablecerAltura(raizBalanceArbol);
         int bal = balance(raizBalanceArbol);
 

@@ -57,6 +57,7 @@ public class ArbolBinarioGraficoController {
         }
     }
     public void dibujarArbolEliminar(){
+        limpiarCanvas();
         dibujarArbol(gc,arbol.getRaizArbol(),canvas.getWidth()/2,canvas.getScaleY()+20,200);
     }
     public void dibujarArbol(GraphicsContext gc, Nodo nodo, double x, double y, double offset){
